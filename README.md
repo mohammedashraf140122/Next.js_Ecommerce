@@ -57,9 +57,15 @@ NEXTAUTH_SECRET=your-secret-key-here-change-this-in-production
 # API Configuration
 API_BASE_URL=https://ecommerce.routemisr.com/api/v1
 NEXT_PUBLIC_API_BASE_URL=https://ecommerce.routemisr.com/api/v1
+
+# Development Environment
+NODE_ENV=development
 ```
 
-**Important**: Replace `your-secret-key-here-change-this-in-production` with a strong secret key for production use.  
+**Important**: 
+- Replace `your-secret-key-here-change-this-in-production` with a strong secret key for production use
+- If you encounter 502 Bad Gateway errors, the external API might be temporarily unavailable
+- The app will show a fallback message when products cannot be loaded  
 
 ---
 

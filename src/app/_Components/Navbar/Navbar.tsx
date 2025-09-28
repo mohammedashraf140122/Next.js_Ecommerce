@@ -77,7 +77,7 @@ const Navbar = () => {
                     <i className="fas fa-shopping-cart"></i>
                     Cart
                     {numOfCartItems > 0 && (
-                      <Badge variant="destructive" className="text-xs font-medium">
+                      <Badge variant="destructive" className="text-xs font-medium bg-red-500 hover:bg-red-600">
                         {numOfCartItems}
                       </Badge>
                     )}
@@ -114,7 +114,7 @@ const Navbar = () => {
                     className="flex items-center gap-1 text-slate-700 hover:text-slate-900 font-medium transition-colors duration-300"
                   >
                     <i className="fas fa-user text-sm"></i>
-                    <span className="capitalize">{session?.user?.name?.split(" ")[0]}</span>
+                    <span className="capitalize">{session?.user?.name?.split(" ")[0] || "User"}</span>
                   </Link>
                   <Dialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
                     <DialogTrigger asChild>
@@ -225,7 +225,7 @@ const Navbar = () => {
                       Cart
                     </div>
                     {numOfCartItems > 0 && (
-                      <Badge variant="destructive" className="text-xs font-medium">
+                      <Badge variant="destructive" className="text-xs font-medium bg-red-500 hover:bg-red-600">
                         {numOfCartItems}
                       </Badge>
                     )}
@@ -262,7 +262,7 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <i className="fas fa-user text-sm"></i>
-                    <span className="capitalize">{session?.user?.name?.split(" ")[0]}</span>
+                    <span className="capitalize">{session?.user?.name?.split(" ")[0] || "User"}</span>
                   </Link>
                   <Dialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
                     <DialogTrigger asChild>

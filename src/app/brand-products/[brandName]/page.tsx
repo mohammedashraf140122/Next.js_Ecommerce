@@ -11,16 +11,30 @@ interface BrandProductsProps {
 }
 
 const BrandProducts = async ({ params }: BrandProductsProps) => {
-  const { brandName } = await params
+  const { brandName } = params
+  const normalizedQuery = decodeURIComponent(brandName).toLowerCase()
   
   // Fetch all products
   const allProducts: Product[] = await getAllProducts()
   
-  // Filter products by brand slug or name (case-insensitive)
-  const brandProducts = allProducts.filter((product: Product) => 
-    product.brand.slug.toLowerCase() === brandName.toLowerCase() ||
-    product.brand.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === brandName.toLowerCase()
-  )
+  // Helper to slugify brand names safely
+  const slugify = (value: string) =>
+    value
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9\-ء-ي]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+
+  // Filter products by brand slug or name (case-insensitive) with guards
+  const brandProducts = allProducts.filter((product: Product) => {
+    const brand = product?.brand as any
+    if (!brand) return false
+    const slug = (brand.slug ?? '').toLowerCase()
+    const nameSlug = brand.name ? slugify(String(brand.name)) : ''
+    return slug === normalizedQuery || nameSlug === normalizedQuery
+  })
   
   // Decode and format brand name for display
   const displayBrandName = brandProducts.length > 0 

@@ -5,6 +5,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET || "fallback-secret-key-for-development-only",
+  // Add explicit URL configuration
+  url: process.env.NEXTAUTH_URL || "http://localhost:3000",
   pages: {
     signIn: "/login",
   },
